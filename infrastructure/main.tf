@@ -52,7 +52,7 @@ module "ec2_instance" {
 
   name = var.name
 
-  ami                         = "ami-07eeacb3005b9beae"
+  ami                         = "ami-004cf5ae13815dc86"
   instance_type               = "t3a.large"
   key_name                    = aws_key_pair.main.key_name
   monitoring                  = false
@@ -62,7 +62,7 @@ module "ec2_instance" {
   associate_public_ip_address = true
   user_data                   = data.template_file.user_data.rendered
   tags                        = var.tags
-  root_block_device           = [ { volume_size = "180",volume_type = "gp3",delete_on_termination = true,}, ]
+  root_block_device           = [ { volume_size = "10",volume_type = "gp2",delete_on_termination = true,}, ]
 
   depends_on = [
     module.vpc
