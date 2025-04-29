@@ -4,7 +4,7 @@ set -e
 
 if [[ "${1}x" == "x" ]]; then
     echo "The instance name was not provided"
-    echo "Usage: ${0} bastion-host-username"
+    echo "Usage: ${0} bastion-host-dolbersen"
     echo " e.g.: ${0} bastion-host-hendrix"
     exit 1
 fi

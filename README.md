@@ -13,11 +13,11 @@ Make sure you have aws credentials configured on you local machine.
 Launch the bastion host infrastructure:
 
 ```sh
-./run.sh bastion-host-username
+./run.sh bastion-host-dolbersen
 ```
 
 ## Clean-up
 
 ```sh
-DESTROY_TF=true ./run.sh bastion-host-username
+DESTROY_TF=true ./run.sh bastion-host-dolbersen
 ```
