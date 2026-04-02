@@ -52,7 +52,7 @@ module "ec2_instance" {
 
   name = var.name
 
-  ami                         = "ami-0685c90b40d39e754"
+  ami                         = "ami-0ea87f786d2923434"
   instance_type               = "t3a.large"
   key_name                    = aws_key_pair.main.key_name
   monitoring                  = false
