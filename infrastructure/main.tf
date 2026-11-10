@@ -46,6 +46,15 @@ data "template_file" "user_data" {
   template = file("../scripts/install.sh")
 }
 
+# EC2 Mac instances only run on a Dedicated Host (24h minimum allocation).
+resource "aws_ec2_host" "mac" {
+  instance_type     = "mac2.metal"
+  availability_zone = element(module.vpc.azs, 0)
+  auto_placement    = "off"
+
+  tags = var.tags
+}
+
 module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "4.3.0"
@@ -54,6 +63,8 @@ module "ec2_instance" {
 
   ami                         = "ami-0f7e2f24d6cd04436"
   instance_type               = "mac2.metal"
+  tenancy                     = "host"
+  host_id                     = aws_ec2_host.mac.id
   key_name                    = aws_key_pair.main.key_name
   monitoring                  = false
   vpc_security_group_ids      = [aws_security_group.bastion.id]
@@ -62,7 +73,7 @@ module "ec2_instance" {
   associate_public_ip_address = true
   user_data                   = data.template_file.user_data.rendered
   tags                        = var.tags
-  root_block_device           = [ { volume_size = "100",volume_type = "gp3",delete_on_termination = true,}, ]
+  root_block_device           = [{ volume_size = "100", volume_type = "gp3", delete_on_termination = true, }, ]
 
   depends_on = [
     module.vpc
