@@ -52,8 +52,8 @@ module "ec2_instance" {
 
   name = var.name
 
-  ami                         = "ami-0ea87f786d2923434"
-  instance_type               = "t3a.large"
+  ami                         = "ami-0f7e2f24d6cd04436"
+  instance_type               = "mac-m4pro.metal"
   key_name                    = aws_key_pair.main.key_name
   monitoring                  = false
   vpc_security_group_ids      = [aws_security_group.bastion.id]
@@ -62,7 +62,7 @@ module "ec2_instance" {
   associate_public_ip_address = true
   user_data                   = data.template_file.user_data.rendered
   tags                        = var.tags
-  root_block_device           = [ { volume_size = "10",volume_type = "gp3",delete_on_termination = true,}, ]
+  root_block_device           = [ { volume_size = "100",volume_type = "gp3",delete_on_termination = true,}, ]
 
   depends_on = [
     module.vpc
