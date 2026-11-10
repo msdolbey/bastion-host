@@ -53,7 +53,7 @@ module "ec2_instance" {
   name = var.name
 
   ami                         = "ami-0f7e2f24d6cd04436"
-  instance_type               = "mac-m4pro.metal"
+  instance_type               = "mac2.metal"
   key_name                    = aws_key_pair.main.key_name
   monitoring                  = false
   vpc_security_group_ids      = [aws_security_group.bastion.id]
